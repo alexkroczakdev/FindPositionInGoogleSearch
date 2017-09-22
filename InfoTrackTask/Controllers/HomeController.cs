@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InfoTrackTask.Logic;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -25,27 +26,10 @@ namespace InfoTrackTask.Controllers
 
         public string FindPostionInSearch(string keywords, string url)
         {
-            var key = keywords.Replace(' ', '+');
-            var list = new List<int>();
-            int num = 100;
+            var customWebClient = new CustomWebClient(keywords);
+            var positions = new FindPositions(url);
 
-            using (var webClient = new WebClient())
-            {
-                var result = webClient.DownloadString("http://www.google.com.au/search?q="+key+"&num="+num+"");
-
-                string[] searchRecords = result.Split(new[] { "<div class=\"g\"" }, StringSplitOptions.None);
-
-                for (int i = 1 ; i<= searchRecords.Length; i++ )
-                {
-                    if(Regex.Matches(searchRecords[i], url).Count > 0)
-                    {
-                        list.Add(i);
-                    }
-                }
-                if (list.Count == 0)
-                    list.Remove(0);                
-            }
-            return String.Join(", ", list.ToArray());
+            return String.Join(", ", positions.GetPostions(customWebClient.QueryGoogle()));
         }
     }
 }
