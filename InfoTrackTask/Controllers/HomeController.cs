@@ -35,7 +35,7 @@ namespace InfoTrackTask.Controllers
 
                 string[] searchRecords = result.Split(new[] { "<div class=\"g\"" }, StringSplitOptions.None);
 
-                for (int i = 1 ; i<=num; i++ )
+                for (int i = 1 ; i<= searchRecords.Length; i++ )
                 {
                     if(Regex.Matches(searchRecords[i], url).Count > 0)
                     {
