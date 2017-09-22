@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
+﻿using System.Net;
 
 namespace InfoTrackTask.Logic
 {
@@ -22,7 +18,6 @@ namespace InfoTrackTask.Logic
             using (var webClient = new WebClient())
             {
                 result = webClient.DownloadString("http://www.google.com.au/search?&num="+_number+"&q=" + _keyWords);
-
             }
             return result;
         }
