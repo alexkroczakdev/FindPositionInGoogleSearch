@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Check positions in google</h2>
+
+@using (Html.BeginForm("Position", "Home"))
+{
+    <p>@Html.TextBox("keyword", "online tiitle search")</p>
+    <p>@Html.TextBox("url", "www.infotrack.com.au")</p>
+    <p><input type="submit" name="check" value="Check positions" /></p>
+}
+
+
+
