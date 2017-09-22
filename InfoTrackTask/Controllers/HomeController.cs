@@ -26,23 +26,24 @@ namespace InfoTrackTask.Controllers
         public string FindPostionInSearch(string keywords, string url)
         {
             var key = keywords.Replace(' ', '+');
+            var list = new List<int>();
+            int num = 100;
 
-            int count = 0;
-            var list = new List<int>() { count };
-            
             using (var webClient = new WebClient())
             {
-                var result = webClient.DownloadString("http://www.google.com.au/search?q="+key+ "&num=100");
-                
-                string[] split = result.Split(new[] { url }, StringSplitOptions.None);
+                var result = webClient.DownloadString("http://www.google.com.au/search?q="+key+"&num="+num+"");
 
-                for (int i = 0; i<split.Length-1; i++)
+                string[] searchRecords = result.Split(new[] { "<div class=\"g\"" }, StringSplitOptions.None);
+
+                for (int i = 1 ; i<=num; i++ )
                 {
-                    count = Regex.Matches(split[i], "<div class=\"g\">").Count;
-                    if (count != 0)
-                        list.Add(list.Last()+count);
+                    if(Regex.Matches(searchRecords[i], url).Count > 0)
+                    {
+                        list.Add(i);
+                    }
                 }
-                list.Remove(0);
+                if (list.Count == 0)
+                    list.Remove(0);                
             }
             return String.Join(", ", list.ToArray());
         }
