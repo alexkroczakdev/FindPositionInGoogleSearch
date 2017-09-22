@@ -8,7 +8,7 @@ namespace InfoTrackTask.Logic
 {
     public class FindPositions
     {
-        string _url;
+        private string _url;
 
         public FindPositions(string url)
         {

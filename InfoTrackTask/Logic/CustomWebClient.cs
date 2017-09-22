@@ -8,8 +8,8 @@ namespace InfoTrackTask.Logic
 {
     public class CustomWebClient
     {
-        string _keyWords;
-        int _number = 100;
+        private string _keyWords;
+        private int _number = 100;
 
         public CustomWebClient(string keywords)
         {
